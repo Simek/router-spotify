@@ -3,6 +3,8 @@ import { useFonts } from "expo-font";
 import { LinearGradient } from "expo-linear-gradient";
 import { Tabs } from "expo-router";
 import * as SplashScreen from "expo-splash-screen";
+import { StatusBar } from "expo-status-bar";
+import * as SystemUI from "expo-system-ui";
 import { useEffect } from "react";
 import { StyleSheet } from "react-native";
 
@@ -14,6 +16,7 @@ import "expo-dev-client";
 import "../global.css";
 
 SplashScreen.preventAutoHideAsync();
+SystemUI.setBackgroundColorAsync("#000");
 
 export default function RootLayout() {
   const [loaded, error] = useFonts({
@@ -36,7 +39,12 @@ export default function RootLayout() {
     return null;
   }
 
-  return <RootLayoutNav />;
+  return (
+    <>
+      <StatusBar style="light" />
+      <RootLayoutNav />
+    </>
+  );
 }
 
 function RootLayoutNav() {

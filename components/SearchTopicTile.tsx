@@ -2,14 +2,10 @@ import { Link } from "expo-router";
 import { Text, View, Image, Pressable } from "react-native";
 import { twMerge } from "tailwind-merge";
 
+import { type SearchTopicItem } from "@/types/global";
+
 type Props = {
   item: SearchTopicItem;
-};
-
-type SearchTopicItem = {
-  text: string;
-  color: string;
-  image?: string;
 };
 
 export function SearchTopicTile({ item }: Props) {
@@ -17,10 +13,9 @@ export function SearchTopicTile({ item }: Props) {
   // also on the Web using it causes app to refresh on scene enter
   return (
     <Link
-      push
       href={{
         pathname: "/search/[genre]",
-        params: { genre: item.text.replaceAll(" ", "-").toLowerCase() },
+        params: { genre: item.id },
       }}
     >
       <Pressable>
@@ -40,8 +35,6 @@ export function SearchTopicTile({ item }: Props) {
                   "https://i.scdn.co/image/ab67616d00001e0292013fc6aec83816d16bb45f",
               }}
               className={twMerge(
-                // NOTE: looks like arbitrary rotate works fine, but it crashes after few refreshes,
-                // especially after unrelated crash has happened
                 "size-24 rounded-md absolute -right-6 -bottom-4 rotate-[30deg] shadow",
                 item.color,
               )}

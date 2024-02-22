@@ -1,0 +1,86 @@
+[
+  {
+    "id": "new",
+    "text": "New Releases",
+    "color": "bg-amber-700",
+    "image": "https://i.scdn.co/image/ab67616d00001e021140ab4baf4c157f4f90e476"
+  },
+  {
+    "id": "podcasts",
+    "text": "Podcasts",
+    "color": "bg-violet-700",
+    "image": "https://i.scdn.co/image/ab6765630000ba8a81f07e1ead0317ee3c285bfa"
+  },
+  {
+    "id": "hip-hop",
+    "text": "Hip-Hop",
+    "color": "bg-cyan-600",
+    "image": "https://i.scdn.co/image/ab67616d00001e023821281174782113387d45e2"
+  },
+  {
+    "id": "pop",
+    "text": "Pop",
+    "color": "bg-blue-900",
+    "image": "https://i.scdn.co/image/ab67616d00001e028cae5034066af45cdfbc4266"
+  },
+  {
+    "id": "edm",
+    "text": "EDM",
+    "color": "bg-amber-700"
+  },
+  {
+    "id": "future",
+    "text": "Future",
+    "color": "bg-violet-700"
+  },
+  {
+    "id": "nu-jazz",
+    "text": "Nu jazz",
+    "color": "bg-pink-600"
+  },
+  {
+    "id": "trap",
+    "text": "Trap",
+    "color": "bg-green-800"
+  },
+  {
+    "id": "dubstep",
+    "text": "Dubstep",
+    "color": "bg-amber-700"
+  },
+  {
+    "id": "drum-and-bass",
+    "text": "Drum and Bass",
+    "color": "bg-violet-700"
+  },
+  {
+    "id": "rnb",
+    "text": "R&B",
+    "color": "bg-pink-600"
+  },
+  {
+    "id": "progressive",
+    "text": "Progressive",
+    "color": "bg-green-800"
+  },
+  {
+    "id": "breakbeat",
+    "text": "Breakbeat",
+    "color": "bg-amber-700"
+  },
+  {
+    "id": "vaporwave",
+    "text": "Vaporwave",
+    "color": "bg-violet-700"
+  },
+  {
+    "id": "funk",
+    "text": "Funk",
+    "color": "bg-pink-600"
+  },
+  {
+    "id": "country",
+    "text": "Country",
+    "color": "bg-green-800"
+  }
+]

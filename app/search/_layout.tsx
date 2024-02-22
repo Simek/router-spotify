@@ -9,9 +9,7 @@ export default function Layout() {
       <Stack.Screen
         name="[genre]"
         options={{
-          headerShown: true,
-          headerBackVisible: true,
-          headerBlurEffect: "dark",
+          headerShown: false,
         }}
       />
     </Stack>

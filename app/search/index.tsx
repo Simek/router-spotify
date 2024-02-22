@@ -1,5 +1,6 @@
 import { Text, SafeAreaView, FlatList, View } from "react-native";
 
+import searchTopics from "@/assets/data/searchTopics.json";
 import { ExploreGenreTile } from "@/components/ExploreGenereTile";
 import { SearchTopicTile } from "@/components/SearchTopicTile";
 
@@ -47,44 +48,7 @@ export default function SearchScreen() {
           renderItem={SearchTopicTile}
           contentContainerStyle={{ gap: 16 }}
           columnWrapperStyle={{ gap: 16 }}
-          data={[
-            {
-              text: "New Releases",
-              color: "bg-amber-700",
-              image:
-                "https://i.scdn.co/image/ab67616d00001e021140ab4baf4c157f4f90e476",
-            },
-            {
-              text: "Podcasts",
-              color: "bg-violet-700",
-              image:
-                "https://i.scdn.co/image/ab6765630000ba8a81f07e1ead0317ee3c285bfa",
-            },
-            {
-              text: "Hip-Hop",
-              color: "bg-cyan-600",
-              image:
-                "https://i.scdn.co/image/ab67616d00001e023821281174782113387d45e2",
-            },
-            {
-              text: "Pop",
-              color: "bg-blue-900",
-              image:
-                "https://i.scdn.co/image/ab67616d00001e028cae5034066af45cdfbc4266",
-            },
-            { text: "New Releases", color: "bg-amber-700" },
-            { text: "Podcasts", color: "bg-violet-700" },
-            { text: "Hip-Hop", color: "bg-pink-600" },
-            { text: "Pop", color: "bg-green-800" },
-            { text: "New Releases", color: "bg-amber-700" },
-            { text: "Podcasts", color: "bg-violet-700" },
-            { text: "Hip-Hop", color: "bg-pink-600" },
-            { text: "Pop", color: "bg-green-800" },
-            { text: "New Releases", color: "bg-amber-700" },
-            { text: "Podcasts", color: "bg-violet-700" },
-            { text: "Hip-Hop", color: "bg-pink-600" },
-            { text: "Pop", color: "bg-green-800" },
-          ]}
+          data={searchTopics}
         />
       </View>
     </SafeAreaView>
