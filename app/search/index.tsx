@@ -1,12 +1,30 @@
+import { Ionicons } from "@expo/vector-icons";
+import { Link, Stack } from "expo-router";
 import { Text, SafeAreaView, FlatList, View } from "react-native";
 
 import searchTopics from "@/assets/data/searchTopics.json";
 import { ExploreGenreTile } from "@/components/ExploreGenereTile";
 import { SearchTopicTile } from "@/components/SearchTopicTile";
+import { TabHeader } from "@/components/navigation/TabHeader";
 
 export default function SearchScreen() {
   return (
     <SafeAreaView className="flex-1 bg-black">
+      <Stack.Screen
+        options={{
+          headerShown: true,
+          header: () => (
+            <TabHeader
+              title="Search"
+              rightSlot={
+                <Link href="/search/modal">
+                  <Ionicons size={30} name="camera-outline" color="#fff" />
+                </Link>
+              }
+            />
+          ),
+        }}
+      />
       <View className="pl-2">
         <FlatList
           numColumns={2}

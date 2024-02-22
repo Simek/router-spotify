@@ -6,6 +6,7 @@
   "scripts": {
     "start": "expo start",
     "build": "eas build --profile development",
+    "build:preview": "eas build --profile preview",
     "lint": "eslint ."
   },
   "dependencies": {
@@ -13,6 +14,7 @@
     "@react-navigation/native": "^6.1.10",
     "expo": "~50.0.7",
     "expo-blur": "~12.9.2",
+    "expo-camera": "~14.0.5",
     "expo-dev-client": "~3.3.8",
     "expo-font": "~11.10.3",
     "expo-image": "~1.10.6",

@@ -6,10 +6,11 @@ export default function Layout() {
   return (
     <Stack screenOptions={{ headerShown: false }}>
       <Stack.Screen name="index" />
+      <Stack.Screen name="[genre]" />
       <Stack.Screen
-        name="[genre]"
+        name="modal"
         options={{
-          headerShown: false,
+          presentation: "modal",
         }}
       />
     </Stack>

@@ -1,5 +1,8 @@
+import { Ionicons } from "@expo/vector-icons";
 import { Stack } from "expo-router";
 import { View, Text } from "react-native";
+
+import { TabHeader } from "@/components/navigation/TabHeader";
 
 export default function LibraryScreen() {
   return (
@@ -7,17 +10,12 @@ export default function LibraryScreen() {
       <Stack.Screen
         options={{
           headerShown: true,
-          headerShadowVisible: false,
-          headerStyle: { backgroundColor: "#000" },
-          headerTitle: ({ children, tintColor }) => (
-            <Text className="font-bold text-xl text-white">{children}</Text>
+          header: () => (
+            <TabHeader
+              title="Your Library"
+              rightSlot={<Ionicons size={30} name="add" color="#fff" />}
+            />
           ),
-          // NOTE: custom header seems to not work
-          // header: ({ navigation, route, options, back }) => (
-          //   <View className="flex-1 items-center justify-center bg-amber-800 h-16">
-          //     <Text className="font-bold text-xl text-white">Your Library</Text>
-          //   </View>
-          // )
         }}
       />
       <Text className="text-white font-default">Library</Text>

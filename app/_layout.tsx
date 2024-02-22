@@ -71,7 +71,7 @@ function RootLayoutNav() {
               style={StyleSheet.absoluteFill}
               colors={["#000c", "#000"]}
               locations={[0, 0.75]}
-            ></LinearGradient>
+            />
           </BlurView>
         ),
       }}

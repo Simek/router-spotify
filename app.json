@@ -38,8 +38,15 @@
         {
           "fonts": [
             "./assets/fonts/Gotham-Bold.otf",
+            "./assets/fonts/Gotham-Medium.otf",
             "./assets/fonts/Gotham-Light.otf"
           ]
+        }
+      ],
+      [
+        "expo-camera",
+        {
+          "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera."
         }
       ]
     ],
