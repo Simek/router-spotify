@@ -1,6 +1,7 @@
 import { Link, Stack } from "expo-router";
 import { Text, View } from "react-native";
 
+// NOTE: '+not-found' is displayed as tab, when Tabs are a root nav
 export default function NotFoundScreen() {
   return (
     <>

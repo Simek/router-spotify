@@ -1,6 +1,6 @@
-// import { Image } from "expo-image";
+import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
-import { Text, Image, View, Pressable, StyleSheet } from "react-native";
+import { Text, View, Pressable, StyleSheet } from "react-native";
 import { twMerge } from "tailwind-merge";
 
 type Props = {
@@ -18,14 +18,14 @@ export function ExploreGenreTile({ item }: Props) {
       {({ pressed }) => (
         <View
           className={twMerge(
-            "h-48 w-[29.5vw] rounded-lg overflow-hidden transition-opacity",
+            "h-48 w-[29.5vw] rounded-lg overflow-hidden bg-gray-900 transition-opacity",
             pressed && "opacity-75",
           )}
         >
           <Image
             // NOTE: changing build-in image to expo-image break #edm GIF playback
-            // source={item.image}
-            source={{ uri: item.image }}
+            source={item.image}
+            // source={{ uri: item.image }}
             // NOTE: class names do not work here
             // className="rounded-md absolute inset-0 w-full h-full bg-gray-800"
             style={StyleSheet.absoluteFill}

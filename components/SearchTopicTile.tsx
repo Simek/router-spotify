@@ -1,3 +1,4 @@
+import { Link } from "expo-router";
 import { Text, View, Image, Pressable } from "react-native";
 import { twMerge } from "tailwind-merge";
 
@@ -12,32 +13,42 @@ type SearchTopicItem = {
 };
 
 export function SearchTopicTile({ item }: Props) {
+  // NOTE: this link works on Web, but not on native platforms
+  // also on the Web using it causes app to refresh on scene enter
   return (
-    <Pressable>
-      {({ pressed }) => (
-        <View
-          className={twMerge(
-            "h-28 px-3 py-2 w-[46vw] rounded-lg overflow-hidden transition-opacity",
-            item.color,
-            pressed && "opacity-80",
-          )}
-        >
-          <Text className="text-white font-bold text-xl">{item.text}</Text>
-          <Image
-            source={{
-              uri:
-                item.image ??
-                "https://i.scdn.co/image/ab67616d00001e0292013fc6aec83816d16bb45f",
-            }}
-            // NOTE: arbitrary rotate value crashes app, extended theme instead
+    <Link
+      push
+      href={{
+        pathname: "/search/[genre]",
+        params: { genre: item.text.replaceAll(" ", "-").toLowerCase() },
+      }}
+    >
+      <Pressable>
+        {({ pressed }) => (
+          <View
             className={twMerge(
-              "size-24 rounded-md absolute -right-6 -bottom-4 rotate-30 bg-gray-800",
-              // NOTE: using "shadow" class produces warning on iOS
-              false && "shadow",
+              "h-28 px-3 py-2 w-[46vw] rounded-lg overflow-hidden transition-opacity",
+              item.color,
+              pressed && "opacity-80",
             )}
-          />
-        </View>
-      )}
-    </Pressable>
+          >
+            <Text className="text-white font-bold text-md">{item.text}</Text>
+            <Image
+              source={{
+                uri:
+                  item.image ??
+                  "https://i.scdn.co/image/ab67616d00001e0292013fc6aec83816d16bb45f",
+              }}
+              className={twMerge(
+                // NOTE: looks like arbitrary rotate works fine, but it crashes after few refreshes,
+                // especially after unrelated crash has happened
+                "size-24 rounded-md absolute -right-6 -bottom-4 rotate-[30deg] shadow",
+                item.color,
+              )}
+            />
+          </View>
+        )}
+      </Pressable>
+    </Link>
   );
 }

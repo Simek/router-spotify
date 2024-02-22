@@ -29,8 +29,7 @@ export default function SearchScreen() {
                   },
                   {
                     tag: "edm",
-                    image:
-                      "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExdTR2bHE2dHFrY2pvbGM1c3B5cDl5OWlsNXdrbWZia25zNzJxcDh5MCZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/ncdSIcmB7iGEvDX1Z3/giphy.gif",
+                    image: "https://i.giphy.com/ncdSIcmB7iGEvDX1Z3.webp",
                   },
                   {
                     tag: "future",
