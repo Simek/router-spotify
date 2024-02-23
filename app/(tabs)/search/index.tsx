@@ -13,9 +13,10 @@ export default function SearchScreen() {
       <Stack.Screen
         options={{
           headerShown: true,
-          header: () => (
+          header: ({ navigation }) => (
             <TabHeader
               title="Search"
+              navigation={navigation}
               rightSlot={
                 <Link href="/search/modal">
                   <Ionicons size={30} name="camera-outline" color="#fff" />

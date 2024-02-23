@@ -10,9 +10,10 @@ export default function LibraryScreen() {
       <Stack.Screen
         options={{
           headerShown: true,
-          header: () => (
+          header: ({ navigation }) => (
             <TabHeader
               title="Your Library"
+              navigation={navigation}
               rightSlot={<Ionicons size={30} name="add" color="#fff" />}
             />
           ),
