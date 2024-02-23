@@ -9,6 +9,7 @@ import { TabBarIcon } from "@/components/tabs/TabBarIcon";
 export default function TabsLayout() {
   return (
     <Tabs
+      initialRouteName="index"
       screenOptions={{
         tabBarStyle: {
           backgroundColor: "transparent",
@@ -36,7 +37,7 @@ export default function TabsLayout() {
       }}
     >
       <Tabs.Screen
-        name="index"
+        name="(index)"
         options={{
           title: "Home",
           tabBarLabelStyle: {
@@ -87,12 +88,6 @@ export default function TabsLayout() {
               color={color}
             />
           ),
-        }}
-      />
-      <Tabs.Screen
-        name="settings"
-        options={{
-          href: null,
         }}
       />
     </Tabs>

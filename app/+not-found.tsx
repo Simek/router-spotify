@@ -1,17 +1,19 @@
 import { Link, Stack } from "expo-router";
-import { Text, View } from "react-native";
+import { SafeAreaView, Text, View } from "react-native";
 
 // NOTE: '+not-found' is displayed as tab, when Tabs are a root nav
 export default function NotFoundScreen() {
   return (
-    <>
+    <SafeAreaView className="flex-1 items-center justify-center bg-black">
       <Stack.Screen options={{ title: "Oops!" }} />
-      <View>
-        <Text>This screen doesn't exist.</Text>
-        <Link href="/">
-          <Text>Go to home screen!</Text>
+      <View className="gap-4 items-center">
+        <Text className="text-white font-medium text-lg">
+          This screen doesn't exist.
+        </Text>
+        <Link className="text-white font-default" href="/">
+          <Text>Home</Text>
         </Link>
       </View>
-    </>
+    </SafeAreaView>
   );
 }

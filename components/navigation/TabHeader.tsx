@@ -1,16 +1,16 @@
-import { DrawerNavigationProp } from "@react-navigation/drawer";
 import { DrawerActions } from "@react-navigation/native";
-import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+import { useNavigation } from "expo-router";
 import { type ReactNode } from "react";
 import { Pressable, SafeAreaView, Text, View } from "react-native";
 
 type Props = {
-  title: string;
-  navigation: DrawerNavigationProp<any> | NativeStackNavigationProp<any>;
+  leftSlot: ReactNode;
   rightSlot?: ReactNode;
+  bottomSlot?: ReactNode;
 };
 
-export function TabHeader({ title, rightSlot, navigation }: Props) {
+export function TabHeader({ leftSlot, rightSlot, bottomSlot }: Props) {
+  const navigation = useNavigation();
   return (
     <SafeAreaView className="bg-black w-full flex">
       <View className="px-4 pb-3 flex flex-row justify-between items-start">
@@ -20,10 +20,15 @@ export function TabHeader({ title, rightSlot, navigation }: Props) {
           >
             <View className="size-8 bg-amber-300 rounded-full inline-flex" />
           </Pressable>
-          <Text className="font-bold text-xl text-white">{title}</Text>
+          {typeof leftSlot === "string" ? (
+            <Text className="font-bold text-xl text-white">{leftSlot}</Text>
+          ) : (
+            leftSlot
+          )}
         </View>
         {rightSlot}
       </View>
+      {bottomSlot}
     </SafeAreaView>
   );
 }

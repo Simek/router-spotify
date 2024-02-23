@@ -15,6 +15,10 @@ import "../global.css";
 SplashScreen.preventAutoHideAsync();
 SystemUI.setBackgroundColorAsync("#000000");
 
+export const unstable_settings = {
+  initialRouteName: "/(tabs)/home",
+};
+
 export default function RootLayout() {
   const [loaded, error] = useFonts({
     GothamLight: require("../assets/fonts/Gotham-Light.otf"),
