@@ -33,10 +33,10 @@ export function ExploreGenreTile({ item }: Props) {
             />
             <LinearGradient
               style={StyleSheet.absoluteFill}
-              colors={["transparent", "#000c"]}
+              colors={["transparent", "#000d"]}
               locations={[0.66, 1]}
             />
-            <Text className="text-white text-lg absolute bottom-2 font-default left-2.5">
+            <Text className="text-white text-md absolute bottom-2.5 font-default left-3">
               #{item.id}
             </Text>
           </View>

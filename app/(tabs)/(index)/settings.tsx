@@ -1,8 +1,16 @@
 import { Ionicons } from "@expo/vector-icons";
-import { Stack } from "expo-router";
+import { Stack, useRouter } from "expo-router";
 import { View, Text, SafeAreaView, Pressable } from "react-native";
 
+import { useAuthStore } from "@/utils/auth";
+import { useUserStore } from "@/utils/user";
+
 export default function SettingsScreen() {
+  const { setAuthToken } = useAuthStore();
+  const { setUser } = useUserStore();
+
+  const router = useRouter();
+
   return (
     <View className="flex-1 items-center justify-center bg-black">
       <Stack.Screen
@@ -24,7 +32,16 @@ export default function SettingsScreen() {
           ),
         }}
       />
-      <Text className="text-white font-default">Settings</Text>
+      <Pressable
+        className="bg-white rounded-full py-2 px-5 items-center min-w-[33vw]"
+        onPress={() => {
+          setAuthToken(null);
+          setUser(null);
+          router.navigate("/");
+        }}
+      >
+        <Text className="font-default text-lg">Log out</Text>
+      </Pressable>
     </View>
   );
 }

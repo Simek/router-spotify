@@ -3,8 +3,8 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Tabs, usePathname } from "expo-router";
 import { StyleSheet } from "react-native";
 
-import { TabBarButton } from "@/components/tabs/TabBarButton";
-import { TabBarIcon } from "@/components/tabs/TabBarIcon";
+import { TabBarButton } from "@/components/navigation/TabBarButton";
+import { TabBarIcon } from "@/components/navigation/TabBarIcon";
 
 export default function TabsLayout() {
   const pathname = usePathname();

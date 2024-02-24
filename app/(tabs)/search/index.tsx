@@ -50,7 +50,7 @@ export default function SearchScreen() {
                   </Text>
                 }
                 renderItem={ExploreGenreTile}
-                columnWrapperStyle={{ gap: 15 }}
+                columnWrapperClassName="gap-4"
                 data={searchGenres}
               />
               <Text className="text-white text-xl font-bold py-2">
@@ -60,8 +60,8 @@ export default function SearchScreen() {
           }
           ListFooterComponent={<View className="h-20 w-full" />}
           renderItem={SearchTopicTile}
-          contentContainerStyle={{ gap: 16 }}
-          columnWrapperStyle={{ gap: 16 }}
+          columnWrapperClassName="gap-4"
+          contentContainerClassName="gap-4"
           data={searchTopics}
         />
       </View>
