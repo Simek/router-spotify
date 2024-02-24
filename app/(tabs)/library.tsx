@@ -26,7 +26,7 @@ export default function LibraryScreen() {
               leftSlot="Your Library"
               rightSlot={<Ionicons size={30} name="add" color="#fff" />}
               bottomSlot={
-                <View className="flex flex-row gap-2 px-4">
+                <View className="flex flex-row gap-2 px-4 mt-1">
                   {activeFilter === "none" ? (
                     <>
                       <Pressable onPress={() => setActiveFilter("playlists")}>

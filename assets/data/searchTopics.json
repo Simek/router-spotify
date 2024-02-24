@@ -20,38 +20,44 @@
   {
     "id": "pop",
     "text": "Pop",
-    "color": "bg-blue-900",
+    "color": "bg-blue-800",
     "image": "https://i.scdn.co/image/ab67616d00001e028cae5034066af45cdfbc4266"
   },
   {
     "id": "edm",
     "text": "EDM",
-    "color": "bg-amber-700"
+    "color": "bg-yellow-600",
+    "image": "https://i.scdn.co/image/ab67706c0000da84641437f763d7baec091e7ca7"
   },
   {
     "id": "future",
     "text": "Future",
-    "color": "bg-violet-700"
+    "color": "bg-emerald-800",
+    "image": "https://i.scdn.co/image/ab67616d00001e02fab93f40474906296410cc50"
   },
   {
     "id": "nu-jazz",
     "text": "Nu jazz",
-    "color": "bg-pink-600"
+    "color": "bg-pink-700",
+    "image": "https://i.scdn.co/image/ab67616d00001e02c3159d6b7980a8ccf078c8c3"
   },
   {
     "id": "trap",
     "text": "Trap",
-    "color": "bg-green-800"
+    "color": "bg-red-800",
+    "image": "https://i.scdn.co/image/ab67616d00001e02de72db76fba30d73cd996979"
   },
   {
     "id": "dubstep",
     "text": "Dubstep",
-    "color": "bg-amber-700"
+    "color": "bg-teal-700",
+    "image": "https://i.scdn.co/image/ab67616d00001e02d4ff5532f233618df9e0d4b5"
   },
   {
     "id": "drum-and-bass",
     "text": "Drum and Bass",
-    "color": "bg-violet-700"
+    "color": "bg-gray-700",
+    "image": "https://i.scdn.co/image/ab67616d0000b27353646297ff85c1b5cc96eb35"
   },
   {
     "id": "rnb",
@@ -74,9 +80,10 @@
     "color": "bg-violet-700"
   },
   {
-    "id": "funk",
-    "text": "Funk",
-    "color": "bg-pink-600"
+    "id": "viral-hits",
+    "text": "Viral Hits",
+    "color": "bg-orange-700",
+    "image": "https://i.scdn.co/image/ab67706f00000002d971c6c23114fc7636dc23eb"
   },
   {
     "id": "country",

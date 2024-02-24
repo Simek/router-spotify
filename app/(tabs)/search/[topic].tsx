@@ -6,13 +6,13 @@ import { twMerge } from "tailwind-merge";
 
 import searchTopics from "@/assets/data/searchTopics.json";
 
-export default function Genre() {
+export default function TopicScreen() {
   const router = useRouter();
   const params = useLocalSearchParams();
 
-  const genreId = Array.isArray(params.genre) ? params.genre[0] : params.genre;
-  const genre =
-    searchTopics && searchTopics.find((topic) => topic.id === genreId);
+  const topicId = Array.isArray(params.topic) ? params.topic[0] : params.topic;
+  const topic =
+    searchTopics && searchTopics.find((topic) => topic.id === topicId);
 
   return (
     <View className="flex-1 items-center justify-center bg-black">
@@ -21,7 +21,7 @@ export default function Genre() {
           headerShown: true,
           header: () => {
             return (
-              <SafeAreaView className={twMerge(genre?.color)}>
+              <SafeAreaView className={twMerge(topic?.color)}>
                 <LinearGradient
                   style={StyleSheet.absoluteFill}
                   colors={["transparent", "#000"]}
@@ -42,7 +42,7 @@ export default function Genre() {
                 </Pressable>
                 <View className="px-4 pb-3">
                   <Text className="font-bold text-2xl text-white">
-                    {genre?.text}
+                    {topic?.text}
                   </Text>
                 </View>
               </SafeAreaView>

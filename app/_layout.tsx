@@ -4,7 +4,7 @@ import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import * as SystemUI from "expo-system-ui";
 import { useEffect } from "react";
-import { GestureHandlerRootView } from "react-native-gesture-handler";
+import { View } from "react-native";
 
 import { DrawerContent } from "@/components/navigation/DrawerContent";
 
@@ -41,7 +41,7 @@ export default function RootLayout() {
   }
 
   return (
-    <GestureHandlerRootView className="flex flex-1">
+    <View className="flex flex-1 bg-black">
       <StatusBar style="light" />
       <Drawer
         drawerContent={() => <DrawerContent />}
@@ -51,6 +51,6 @@ export default function RootLayout() {
       >
         <Drawer.Screen name="(tabs)" />
       </Drawer>
-    </GestureHandlerRootView>
+    </View>
   );
 }

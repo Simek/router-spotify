@@ -12,7 +12,7 @@ type Props = {
 export function TabHeader({ leftSlot, rightSlot, bottomSlot }: Props) {
   const navigation = useNavigation();
   return (
-    <SafeAreaView className="bg-black w-full flex">
+    <SafeAreaView className="w-full flex">
       <View className="px-4 pb-3 flex flex-row justify-between items-start">
         <View className="flex flex-row items-center gap-2">
           <Pressable

@@ -1,20 +1,26 @@
 import { BlurView } from "expo-blur";
 import { LinearGradient } from "expo-linear-gradient";
-import { Tabs } from "expo-router";
+import { Tabs, usePathname } from "expo-router";
 import { StyleSheet } from "react-native";
 
 import { TabBarButton } from "@/components/tabs/TabBarButton";
 import { TabBarIcon } from "@/components/tabs/TabBarIcon";
 
 export default function TabsLayout() {
+  const pathname = usePathname();
+
   return (
     <Tabs
       initialRouteName="index"
+      sceneContainerStyle={{
+        backgroundColor: "#000",
+      }}
       screenOptions={{
         tabBarStyle: {
           backgroundColor: "transparent",
           borderTopWidth: 0,
           position: "absolute",
+          bottom: pathname.startsWith("/search/genre") ? -80 : 0,
         },
         tabBarActiveTintColor: "#fff",
         headerShown: false,

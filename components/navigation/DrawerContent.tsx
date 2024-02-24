@@ -1,7 +1,7 @@
 import { Ionicons } from "@expo/vector-icons";
-import { Link } from "expo-router";
 import { Pressable, SafeAreaView, Text, View } from "react-native";
-import { twMerge } from "tailwind-merge";
+
+import DrawerLink from "@/components/navigation/DrawerLink";
 
 export function DrawerContent() {
   return (
@@ -20,23 +20,18 @@ export function DrawerContent() {
           <Ionicons name="flash-outline" size={24} color="#fff" />
           <Text className="font-default text-md text-white">What's new</Text>
         </Pressable>
-        <Link href="/settings" asChild>
-          <Pressable>
-            {({ pressed }) => (
-              <View
-                className={twMerge(
-                  "flex flex-row gap-2 items-center",
-                  pressed && "opacity-80",
-                )}
-              >
-                <Ionicons name="settings-outline" size={24} color="#fff" />
-                <Text className="font-default text-md text-white">
-                  Settings and privacy
-                </Text>
-              </View>
-            )}
-          </Pressable>
-        </Link>
+        <DrawerLink
+          href="/settings"
+          title="Settings and privacy"
+          iconName="settings-outline"
+        />
+        <DrawerLink
+          // NOTE: Sitemap screen exist, but TS complains
+          // @ts-ignore
+          href="/_sitemap"
+          title="Sitemap"
+          iconName="trail-sign-outline"
+        />
       </View>
     </SafeAreaView>
   );
