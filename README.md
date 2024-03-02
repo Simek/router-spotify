@@ -5,8 +5,8 @@ A stub app created to dogfood `expo-router`, `nativewind` and other Expo SDK pac
 ## Development builds
 
 You can download the latest development build using links below:
-* [Android](https://expo.dev/accounts/simek/projects/router-spotify/builds/af76897b-52bf-4ffb-bdb9-4bccb7f6591b)
-* [iOS](https://expo.dev/accounts/simek/projects/router-spotify/builds/a95f6e87-83da-4d81-a0e6-d0843274b01d) (simulator only)
+* [Android](https://expo.dev/accounts/simek/projects/router-spotify/builds/5539d106-dd08-4b6e-80d4-042346fbbe2a)
+* [iOS](https://expo.dev/accounts/simek/projects/router-spotify/builds/961ff9d3-c565-4a99-85ac-d8e1b0213db6) (simulator only)
 
 ## Contributing
 

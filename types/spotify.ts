@@ -1,10 +1,13 @@
-export type BaseListResponse<T> = {
+export type BaseListResponse = {
   href: string;
   limit: number;
   next: string;
   offset: number;
   previous: string;
   total: number;
+};
+
+export type ListResponse<T> = BaseListResponse & {
   items: T[];
 };
 
@@ -55,12 +58,13 @@ export type Artist = {
   uri: string;
 };
 
-export type TopArtists = BaseListResponse<Artist>;
+export type TopArtists = ListResponse<Artist>;
 
 export type Album = {
   href: string;
   id: string;
   name: string;
+  artists: Artist[];
   total_tracks: string;
   images: Image[];
 };
@@ -68,12 +72,33 @@ export type Album = {
 export type Track = {
   artist: Artist;
   album: Album;
+  explicit: boolean;
   track_number: number;
   duration_ms: number;
   popularity: number;
   href: string;
   id: string;
   name: string;
+  preview_url?: string;
 };
 
-export type TopTracks = BaseListResponse<Track>;
+export type TopTracks = ListResponse<Track>;
+
+export type Playlist = {
+  href: string;
+  id: string;
+  name: string;
+  images: Image[];
+};
+
+export type SearchPlaylist = BaseListResponse & {
+  playlists: {
+    items: Playlist[];
+  };
+};
+
+export type SearchAlbums = BaseListResponse & {
+  albums: {
+    items: Album[];
+  };
+};

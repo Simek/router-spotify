@@ -15,7 +15,7 @@ export function SearchTopicTile({ item }: Props) {
         {({ pressed }) => (
           <View
             className={twMerge(
-              "h-28 px-3 py-2 w-[46vw] rounded-lg overflow-hidden transition-opacity",
+              "h-28 px-4 py-3 w-[46vw] rounded-lg overflow-hidden transition-opacity",
               item.color,
               pressed && "opacity-80",
             )}
