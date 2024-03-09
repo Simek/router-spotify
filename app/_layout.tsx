@@ -1,3 +1,4 @@
+import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
 import {
   exchangeCodeAsync,
   useAuthRequest,
@@ -10,6 +11,7 @@ import { StatusBar } from "expo-status-bar";
 import * as SystemUI from "expo-system-ui";
 import { useEffect } from "react";
 import { Pressable, SafeAreaView, Text, View } from "react-native";
+import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import { DrawerContent } from "@/components/navigation/DrawerContent";
 import { authDiscovery, authRequestConfig, useAuthStore } from "@/utils/auth";
@@ -85,17 +87,19 @@ export default function RootLayout() {
   }
 
   return (
-    <View className="flex flex-1 bg-black">
+    <GestureHandlerRootView className="flex flex-1 bg-black">
       <StatusBar style="light" />
       {SKIP_AUTH || authToken ? (
-        <Drawer
-          drawerContent={() => <DrawerContent />}
-          screenOptions={{
-            headerShown: false,
-          }}
-        >
-          <Drawer.Screen name="(tabs)" />
-        </Drawer>
+        <BottomSheetModalProvider>
+          <Drawer
+            drawerContent={() => <DrawerContent />}
+            screenOptions={{
+              headerShown: false,
+            }}
+          >
+            <Drawer.Screen name="(tabs)" />
+          </Drawer>
+        </BottomSheetModalProvider>
       ) : (
         <SafeAreaView className="flex flex-1 items-center justify-center">
           <Pressable
@@ -107,6 +111,6 @@ export default function RootLayout() {
           </Pressable>
         </SafeAreaView>
       )}
-    </View>
+    </GestureHandlerRootView>
   );
 }

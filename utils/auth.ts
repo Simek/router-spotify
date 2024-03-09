@@ -11,6 +11,8 @@ export const authRequestConfig = {
     "user-read-email",
     "user-read-recently-played",
     "user-top-read",
+    "user-read-playback-state",
+    "user-modify-playback-state",
     "playlist-read-private",
     "playlist-read-collaborative",
   ],

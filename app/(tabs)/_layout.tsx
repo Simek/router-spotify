@@ -3,6 +3,7 @@ import { LinearGradient } from "expo-linear-gradient";
 import { Tabs, usePathname } from "expo-router";
 import { StyleSheet } from "react-native";
 
+import { PlayerSheet } from "@/components/PlayerSheet";
 import { TabBarButton } from "@/components/navigation/TabBarButton";
 import { TabBarIcon } from "@/components/navigation/TabBarIcon";
 
@@ -10,92 +11,95 @@ export default function TabsLayout() {
   const pathname = usePathname();
 
   return (
-    <Tabs
-      initialRouteName="index"
-      sceneContainerStyle={{
-        backgroundColor: "#000",
-      }}
-      screenOptions={{
-        tabBarStyle: {
-          backgroundColor: "transparent",
-          borderTopWidth: 0,
-          position: "absolute",
-          bottom: pathname.startsWith("/search/genre") ? -80 : 0,
-        },
-        tabBarActiveTintColor: "#fff",
-        headerShown: false,
-        tabBarBackground: () => (
-          <BlurView
-            intensity={12}
-            tint="dark"
-            experimentalBlurMethod="dimezisBlurView"
-            className="absolute inset-0 w-full h-full"
-          >
-            <LinearGradient
-              // NOTE: NW classes does not work here
-              // className="absolute inset-0 w-full h-full"
-              style={StyleSheet.absoluteFill}
-              colors={["#000c", "#000"]}
-              locations={[0, 0.75]}
-            />
-          </BlurView>
-        ),
-      }}
-    >
-      <Tabs.Screen
-        name="(index)"
-        options={{
-          title: "Home",
-          tabBarLabelStyle: {
-            marginBottom: -4,
-            fontFamily: "GothamMedium",
-            userSelect: "none",
+    <>
+      <Tabs
+        initialRouteName="index"
+        sceneContainerStyle={{
+          backgroundColor: "#000",
+        }}
+        screenOptions={{
+          tabBarStyle: {
+            backgroundColor: "transparent",
+            borderTopWidth: 0,
+            position: "absolute",
+            bottom: pathname.startsWith("/search/genre") ? -80 : 0,
           },
-          tabBarButton: (props) => <TabBarButton {...props} />,
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon
-              name={focused ? "home" : "home-outline"}
-              color={color}
-            />
+          tabBarActiveTintColor: "#fff",
+          headerShown: false,
+          tabBarBackground: () => (
+            <BlurView
+              intensity={12}
+              tint="dark"
+              experimentalBlurMethod="dimezisBlurView"
+              className="absolute inset-0 w-full h-full"
+            >
+              <LinearGradient
+                // NOTE: NW classes does not work here
+                // className="absolute inset-0 w-full h-full"
+                style={StyleSheet.absoluteFill}
+                colors={["#000c", "#000"]}
+                locations={[0, 0.75]}
+              />
+            </BlurView>
           ),
         }}
-      />
-      <Tabs.Screen
-        name="search"
-        options={{
-          title: "Search",
-          tabBarLabelStyle: {
-            marginBottom: -4,
-            fontFamily: "GothamMedium",
-            userSelect: "none",
-          },
-          tabBarButton: (props) => <TabBarButton {...props} />,
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon
-              name={focused ? "search" : "search-outline"}
-              color={color}
-            />
-          ),
-        }}
-      />
-      <Tabs.Screen
-        name="library"
-        options={{
-          title: "Your Library",
-          tabBarLabelStyle: {
-            marginBottom: -4,
-            fontFamily: "GothamMedium",
-            userSelect: "none",
-          },
-          tabBarButton: (props) => <TabBarButton {...props} />,
-          tabBarIcon: ({ color, focused }) => (
-            <TabBarIcon
-              name={focused ? "library" : "library-outline"}
-              color={color}
-            />
-          ),
-        }}
-      />
-    </Tabs>
+      >
+        <Tabs.Screen
+          name="(index)"
+          options={{
+            title: "Home",
+            tabBarLabelStyle: {
+              marginBottom: -4,
+              fontFamily: "GothamMedium",
+              userSelect: "none",
+            },
+            tabBarButton: (props) => <TabBarButton {...props} />,
+            tabBarIcon: ({ color, focused }) => (
+              <TabBarIcon
+                name={focused ? "home" : "home-outline"}
+                color={color}
+              />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="search"
+          options={{
+            title: "Search",
+            tabBarLabelStyle: {
+              marginBottom: -4,
+              fontFamily: "GothamMedium",
+              userSelect: "none",
+            },
+            tabBarButton: (props) => <TabBarButton {...props} />,
+            tabBarIcon: ({ color, focused }) => (
+              <TabBarIcon
+                name={focused ? "search" : "search-outline"}
+                color={color}
+              />
+            ),
+          }}
+        />
+        <Tabs.Screen
+          name="library"
+          options={{
+            title: "Your Library",
+            tabBarLabelStyle: {
+              marginBottom: -4,
+              fontFamily: "GothamMedium",
+              userSelect: "none",
+            },
+            tabBarButton: (props) => <TabBarButton {...props} />,
+            tabBarIcon: ({ color, focused }) => (
+              <TabBarIcon
+                name={focused ? "library" : "library-outline"}
+                color={color}
+              />
+            ),
+          }}
+        />
+      </Tabs>
+      <PlayerSheet />
+    </>
   );
 }

@@ -3,7 +3,7 @@ import { CameraView, useCameraPermissions } from "expo-camera/next";
 import { Link, useRouter } from "expo-router";
 import { Button, Text, View } from "react-native";
 
-// NOTE: `expo-camera` crashed router app due to Worker usage
+// NOTE: `expo-camera` crashed app on web due to Worker usage
 export default function ScanCodeModal() {
   const [permission, requestPermission] = useCameraPermissions();
   const router = useRouter();

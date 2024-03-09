@@ -14,10 +14,10 @@ import {
 
 import { Pill } from "@/components/Pill";
 import { TabHeader } from "@/components/navigation/TabHeader";
-import type { Artist, TopArtists, TopTracks, Track } from "@/types/spotify";
+import { TopTrackTile } from "@/components/navigation/TopTrackTile";
+import type { Artist, TopArtists, TopTracks } from "@/types/spotify";
 import { useAuthStore } from "@/utils/auth";
 import { fetchAPI } from "@/utils/fetch";
-import {TopTrackTile} from "@/components/navigation/TopTrackTile";
 
 type HomeLists = "all" | "music" | "podcasts";
 
@@ -30,7 +30,7 @@ export default function HomeScreen() {
 
   useEffect(() => {
     fetchAPI(
-      "me/top/tracks?time_range=medium_term&limit=8&offset=0",
+      "me/top/tracks?time_range=long_term&limit=8&offset=0",
       authToken,
       setUserTopTracks,
     );

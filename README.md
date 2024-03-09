@@ -2,11 +2,20 @@
 
 A stub app created to dogfood `expo-router`, `nativewind` and other Expo SDK packages.
 
+> [!important]
+> Using some features, like playback control, require Spotify Premium subscription.
+
+## App preview
+
+<img src=".github/assets/screen1.png" width="270" alt="Screenshot" />
+<img src=".github/assets/screen2.png" width="270" alt="Screenshot" />
+<img src=".github/assets/screen3.png" width="270" alt="Screenshot" />
+
 ## Development builds
 
 You can download the latest development build using links below:
-* [Android](https://expo.dev/accounts/simek/projects/router-spotify/builds/5539d106-dd08-4b6e-80d4-042346fbbe2a)
-* [iOS](https://expo.dev/accounts/simek/projects/router-spotify/builds/961ff9d3-c565-4a99-85ac-d8e1b0213db6) (simulator only)
+* [Android](https://expo.dev/accounts/simek/projects/router-spotify/builds/c03aa0b7-5e74-4d61-9eb2-53c37ceeb0dc)
+* [iOS](https://expo.dev/accounts/simek/projects/router-spotify/builds/959bdfea-7fbb-4c06-aa7f-12072905d06a) (simulator only)
 
 ## Contributing
 
