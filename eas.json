@@ -1,6 +1,15 @@
 {
   "build": {
+    "base": {
+      "android": {
+        "image": "latest"
+      },
+      "ios": {
+        "image": "latest"
+      }
+    },
     "development": {
+      "extends": "base",
       "developmentClient": true,
       "distribution": "internal",
       "ios": {
@@ -8,6 +17,7 @@
       }
     },
     "preview": {
+      "extends": "base",
       "distribution": "internal"
     }
   }
