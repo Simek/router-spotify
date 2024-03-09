@@ -7,9 +7,9 @@ A stub app created to dogfood `expo-router`, `nativewind` and other Expo SDK pac
 
 ## App preview
 
-<img src=".github/assets/screen1.png" width="264" alt="Screenshot" align="left" />
-<img src=".github/assets/screen2.png" width="264" alt="Screenshot" align="left" />
-<img src=".github/assets/screen3.png" width="264" alt="Screenshot" />
+<img src=".github/assets/screen1.png" width="260" alt="Screenshot" align="left" />
+<img src=".github/assets/screen2.png" width="260" alt="Screenshot" align="left" />
+<img src=".github/assets/screen3.png" width="260" alt="Screenshot" />
 
 ## Development builds
 
