@@ -1,5 +1,7 @@
 import { type SetStateAction } from "react";
 
+const DEBUG = false;
+
 export async function fetchAPI(
   path: string,
   authToken: string | null,
@@ -9,8 +11,11 @@ export async function fetchAPI(
     headers: { Authorization: `Bearer ${authToken}` },
   })
     .then((response) => {
-      if (response.status === 204) {
-        return {};
+      if (DEBUG) {
+        console.warn(`https://api.spotify.com/v1/${path}`, response.status);
+      }
+      if ([204, 401, 404].includes(response.status)) {
+        return null;
       }
       return response.json();
     })
@@ -19,15 +24,19 @@ export async function fetchAPI(
     });
 }
 
-export async function fetAPIControl(
+export async function fetchAPIControl(
   path: string,
   authToken: string | null,
   method?: string,
-  body?: string,
+  body?: object,
 ) {
   await fetch(`https://api.spotify.com/v1/${path}`, {
     headers: { Authorization: `Bearer ${authToken}` },
     method: method ?? "PUT",
-    body,
-  }).then(() => {});
+    body: body ? JSON.stringify(body) : undefined,
+  }).then((response) => {
+    if (DEBUG) {
+      console.warn(`https://api.spotify.com/v1/${path}`, response.status);
+    }
+  });
 }

@@ -1,6 +1,7 @@
 import { BlurView } from "expo-blur";
 import { LinearGradient } from "expo-linear-gradient";
 import { Tabs, usePathname } from "expo-router";
+import { StatusBar } from "expo-status-bar";
 import { StyleSheet } from "react-native";
 
 import { PlayerSheet } from "@/components/PlayerSheet";
@@ -12,6 +13,7 @@ export default function TabsLayout() {
 
   return (
     <>
+      <StatusBar style="light" />
       <Tabs
         initialRouteName="index"
         sceneContainerStyle={{
@@ -23,6 +25,11 @@ export default function TabsLayout() {
             borderTopWidth: 0,
             position: "absolute",
             bottom: pathname.startsWith("/search/genre") ? -80 : 0,
+          },
+          tabBarLabelStyle: {
+            marginBottom: -4,
+            fontFamily: "GothamMedium",
+            userSelect: "none",
           },
           tabBarActiveTintColor: "#fff",
           headerShown: false,
@@ -48,11 +55,6 @@ export default function TabsLayout() {
           name="(index)"
           options={{
             title: "Home",
-            tabBarLabelStyle: {
-              marginBottom: -4,
-              fontFamily: "GothamMedium",
-              userSelect: "none",
-            },
             tabBarButton: (props) => <TabBarButton {...props} />,
             tabBarIcon: ({ color, focused }) => (
               <TabBarIcon
@@ -66,11 +68,6 @@ export default function TabsLayout() {
           name="search"
           options={{
             title: "Search",
-            tabBarLabelStyle: {
-              marginBottom: -4,
-              fontFamily: "GothamMedium",
-              userSelect: "none",
-            },
             tabBarButton: (props) => <TabBarButton {...props} />,
             tabBarIcon: ({ color, focused }) => (
               <TabBarIcon
@@ -84,11 +81,6 @@ export default function TabsLayout() {
           name="library"
           options={{
             title: "Your Library",
-            tabBarLabelStyle: {
-              marginBottom: -4,
-              fontFamily: "GothamMedium",
-              userSelect: "none",
-            },
             tabBarButton: (props) => <TabBarButton {...props} />,
             tabBarIcon: ({ color, focused }) => (
               <TabBarIcon

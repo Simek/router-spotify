@@ -3,6 +3,7 @@ import { BottomSheetModal, BottomSheetScrollView } from "@gorhom/bottom-sheet";
 import { Image } from "expo-image";
 import { LinearGradient } from "expo-linear-gradient";
 import { usePathname } from "expo-router";
+import { StatusBar } from "expo-status-bar";
 import { useCallback, useEffect, useMemo, useRef, useState } from "react";
 import { View, Text, StyleSheet, Pressable, SafeAreaView } from "react-native";
 import { getColors, ImageColorsResult } from "react-native-image-colors";
@@ -14,8 +15,9 @@ import Animated, {
 } from "react-native-reanimated";
 import { twMerge } from "tailwind-merge";
 
+import { PlayerState } from "@/types/spotify";
 import { useAuthStore } from "@/utils/auth";
-import { fetAPIControl, fetchAPI } from "@/utils/fetch";
+import { fetchAPIControl, fetchAPI } from "@/utils/fetch";
 import { getPreferredBackgroundColor, msToDuration } from "@/utils/helpers";
 import { usePlayerStore } from "@/utils/player";
 
@@ -28,9 +30,19 @@ export function PlayerSheet() {
   const { player, setPlayerData } = usePlayerStore();
 
   useEffect(() => {
-    fetchAPI(`me/player`, authToken, setPlayerData);
+    fetchAPI(`me/player`, authToken, (data: PlayerState) => {
+      if (!data) return;
+      setPlayerData(data);
+    });
 
-    setInterval(() => fetchAPI(`me/player`, authToken, setPlayerData), 1000);
+    setInterval(
+      () =>
+        fetchAPI(`me/player`, authToken, (data: PlayerState) => {
+          if (!data) return;
+          setPlayerData(data);
+        }),
+      1000,
+    );
   }, []);
 
   useEffect(() => {
@@ -46,17 +58,17 @@ export function PlayerSheet() {
     }
   }, [player]);
 
-  const progress = useSharedValue(player?.progress_ms ?? 0);
-  const progressStyle = useAnimatedStyle(() => ({
+  const playbackProgress = useSharedValue(player?.progress_ms ?? 0);
+  const playbackProgressStyle = useAnimatedStyle(() => ({
     width: `${interpolate(
-      progress.value,
+      playbackProgress.value,
       [0, player?.item?.duration_ms ?? 0],
       [0, 100],
       Extrapolation.CLAMP,
     )}%`,
   }));
 
-  progress.value = player?.progress_ms ?? 0;
+  playbackProgress.value = player?.progress_ms ?? 0;
 
   const snapPoints = useMemo(() => ["100%", "100%"], []);
 
@@ -71,9 +83,9 @@ export function PlayerSheet() {
   async function playPauseAction() {
     if (player) {
       if (player.is_playing) {
-        await fetAPIControl(`me/player/pause`, authToken);
+        await fetchAPIControl(`me/player/pause`, authToken);
       } else {
-        await fetAPIControl(`me/player/play`, authToken);
+        await fetchAPIControl(`me/player/play`, authToken);
       }
       await fetchAPI(`me/player`, authToken, setPlayerData);
     }
@@ -81,14 +93,14 @@ export function PlayerSheet() {
 
   async function playPreviousAction() {
     if (player) {
-      await fetAPIControl(`me/player/previous`, authToken, "POST");
+      await fetchAPIControl(`me/player/previous`, authToken, "POST");
       await fetchAPI(`me/player`, authToken, setPlayerData);
     }
   }
 
   async function playNextAction() {
     if (player) {
-      await fetAPIControl(`me/player/next`, authToken, "POST");
+      await fetchAPIControl(`me/player/next`, authToken, "POST");
       await fetchAPI(`me/player`, authToken, setPlayerData);
     }
   }
@@ -103,11 +115,11 @@ export function PlayerSheet() {
         locations={[0, 0.75]}
       />
       <Pressable onPress={handlePresentModalPress}>
-        <View
+        <Animated.View
           className="relative flex flex-row gap-3 w-[98vw] mx-[1vw] h-[56px] mt-[22px] rounded-lg p-2 items-center bg-[#333]"
           style={{ backgroundColor }}
         >
-          <View style={StyleSheet.absoluteFill} className="bg-[#0005]" />
+          <View style={StyleSheet.absoluteFill} className="bg-[#0006]" />
           <Image
             source={player.item.album.images[0].url}
             style={{ width: 40, height: 40, borderRadius: 4 }}
@@ -116,7 +128,7 @@ export function PlayerSheet() {
             <View className="absolute h-0.5 w-full bg-[#fff4] bottom-0 left-2">
               <Animated.View
                 className="flex h-0.5 rounded-full bg-[#fff]"
-                style={progressStyle}
+                style={playbackProgressStyle}
               />
             </View>
           ) : null}
@@ -151,7 +163,7 @@ export function PlayerSheet() {
               color="#fff"
             />
           </Pressable>
-        </View>
+        </Animated.View>
       </Pressable>
       <BottomSheetModal
         enablePanDownToClose
@@ -162,19 +174,24 @@ export function PlayerSheet() {
       >
         <View className="absolute inset-0 size-full -z-[1] bg-[#111]" />
         <BottomSheetScrollView contentContainerClassName="flex flex-1 items-center bg-[#111] pt-10 rounded-t-2xl overflow-hidden min-h-[100vh]">
+          <StatusBar style="light" />
           <LinearGradient
             style={[StyleSheet.absoluteFill]}
             colors={[backgroundColor, "transparent"]}
             locations={[0, 0.8]}
           />
           <SafeAreaView>
-            <View className="flex flex-row justify-between my-4">
+            <View className="flex flex-row items-center justify-between mt-2 mb-2">
               <Pressable
                 onPress={() => bottomSheetModalRef?.current?.dismiss()}
               >
                 <Ionicons name="chevron-down" size={24} color="#fff" />
               </Pressable>
-              <Text className="text-white font-bold text-sm">
+              <Text
+                className="text-white w-[68vw] font-bold text-sm truncate text-center"
+                numberOfLines={2}
+                ellipsizeMode="tail"
+              >
                 {player.item.album.name ?? player?.context?.type ?? ""}
               </Text>
               <Ionicons name="ellipsis-horizontal" size={24} color="#fff" />
@@ -200,7 +217,7 @@ export function PlayerSheet() {
             <View className="h-1 w-[86vw] bg-[#fff4]">
               <Animated.View
                 className="flex h-1 bg-[#fff] rounded-full"
-                style={progressStyle}
+                style={playbackProgressStyle}
               >
                 <View className="absolute rounded-full size-3 bg-[#fff] flex -right-1 -top-1" />
               </Animated.View>
@@ -237,6 +254,7 @@ export function PlayerSheet() {
                       name={player.is_playing ? "pause" : "play"}
                       size={36}
                       color="#000"
+                      className={twMerge(!player.is_playing && "-right-[3px]")}
                     />
                   </View>
                 )}

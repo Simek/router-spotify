@@ -105,7 +105,7 @@ export default function HomeScreen() {
                 columnWrapperClassName="flex gap-3"
                 contentContainerClassName="px-4 gap-3"
                 data={userTopTracks?.items}
-                renderItem={TopTrackTile}
+                renderItem={({ item }) => <TopTrackTile item={item} />}
               />
             )}
           </View>
