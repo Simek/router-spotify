@@ -12,14 +12,26 @@ export function msToDuration(value?: number | null) {
   }`;
 }
 
+function isInvalidColor(color: string) {
+  return color.includes("FF") || color.includes("FE") || color.includes("0");
+}
+
 export function getPreferredBackgroundColor(colors: ImageColorsResult | null) {
   if (!colors) {
     return "#111";
   }
 
   if (colors.platform === "ios") {
-    if (!colors.detail.includes("F") && !colors.detail.includes("00")) {
-      return colors.detail;
+    if (isInvalidColor(colors.primary)) {
+      if (isInvalidColor(colors.detail)) {
+        if (isInvalidColor(colors.secondary)) {
+          return colors.background;
+        } else {
+          return colors.secondary;
+        }
+      } else {
+        return colors.detail;
+      }
     } else {
       return colors.primary;
     }
