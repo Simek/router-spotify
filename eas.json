@@ -16,6 +16,11 @@
         "simulator": true
       }
     },
+    "internal": {
+      "extends": "base",
+      "developmentClient": true,
+      "distribution": "internal"
+    },
     "preview": {
       "extends": "base",
       "distribution": "internal"
