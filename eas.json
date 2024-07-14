@@ -25,5 +25,8 @@
       "extends": "base",
       "distribution": "internal"
     }
+  },
+  "cli": {
+    "promptToConfigurePushNotifications": false
   }
 }

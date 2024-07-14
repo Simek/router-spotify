@@ -1,5 +1,5 @@
 import { Ionicons } from "@expo/vector-icons";
-import { CameraView, useCameraPermissions } from "expo-camera/next";
+import { CameraView, useCameraPermissions } from "expo-camera";
 import { Link, useRouter } from "expo-router";
 import { Button, Text, View } from "react-native";
 
@@ -15,7 +15,7 @@ export default function ScanCodeModal() {
 
   if (!permission.granted) {
     return (
-      <View className="bg-[#000a] flex flex-1">
+      <View className="bg-black flex flex-1">
         <Text className="text-white font-default">
           We need your permission to show the camera
         </Text>
@@ -26,7 +26,7 @@ export default function ScanCodeModal() {
 
   return (
     <View className="bg-black flex flex-1">
-      <CameraView className="flex flex-1" facing="back">
+      <CameraView className="absolute inset-0" facing="back">
         {isPresented && (
           <Link href="../" className="m-4">
             <Ionicons name="close" size={30} color="#fff" />
