@@ -53,7 +53,7 @@ export default function TopicScreen() {
         options={{
           headerShown: true,
           header: () => (
-            <SafeAreaView>
+            <SafeAreaView className="web:py-4">
               <Pressable onPress={() => router.navigate("/search")}>
                 {({ pressed }) => (
                   <Ionicons

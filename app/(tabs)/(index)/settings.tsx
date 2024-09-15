@@ -17,7 +17,7 @@ export default function SettingsScreen() {
         options={{
           headerShown: true,
           header: ({ navigation }) => (
-            <SafeAreaView className="bg-black w-full flex">
+            <SafeAreaView className="bg-black w-full flex web:py-4">
               <View className="px-4 pb-3 flex flex-row justify-between items-center gap-2">
                 <Pressable
                   onPress={() => navigation.goBack()}

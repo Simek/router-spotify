@@ -10,6 +10,7 @@ import {
   ScrollView,
   StyleSheet,
   FlatList,
+  Platform,
 } from "react-native";
 
 import { Pill } from "@/components/Pill";
@@ -100,7 +101,10 @@ export default function HomeScreen() {
             <Text className="text-white text-xl font-bold p-4">Top tracks</Text>
             {userTopTracks?.items && (
               <FlatList
-                numColumns={2}
+                numColumns={Platform.select({
+                  web: 4,
+                  default: 2,
+                })}
                 scrollEnabled={false}
                 columnWrapperClassName="flex gap-3"
                 contentContainerClassName="px-4 gap-3"

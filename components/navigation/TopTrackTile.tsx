@@ -35,6 +35,7 @@ export function TopTrackTile({ item }: Props) {
         <View
           className={twMerge(
             "flex flex-row gap-2 items-center rounded-md bg-[#222] w-[46vw] pr-2 relative transition",
+            "web:w-[24vw]",
             pressed ? "scale-95" : "scale-100",
           )}
         >

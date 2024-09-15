@@ -17,7 +17,7 @@ export function TabHeader({ leftSlot, rightSlot, bottomSlot }: Props) {
   const { user } = useUserStore();
 
   return (
-    <SafeAreaView className="w-full flex">
+    <SafeAreaView className="w-full flex bg-black web:py-4">
       <View className="px-4 pb-3 flex flex-row justify-between items-start">
         <View className="flex flex-row items-center gap-2">
           <Pressable

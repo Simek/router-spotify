@@ -1,20 +1,23 @@
 import { BottomSheetModalProvider } from "@gorhom/bottom-sheet";
-import {
-  exchangeCodeAsync,
-  useAuthRequest,
-  type TokenResponse,
-} from "expo-auth-session";
+import { useAuthRequest, type TokenResponse } from "expo-auth-session";
 import { useFonts } from "expo-font";
+import { useGlobalSearchParams } from "expo-router";
 import { Drawer } from "expo-router/drawer";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import * as SystemUI from "expo-system-ui";
+import { maybeCompleteAuthSession } from "expo-web-browser";
 import { useEffect } from "react";
 import { Pressable, SafeAreaView, Text, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import { DrawerContent } from "@/components/navigation/DrawerContent";
-import { authDiscovery, authRequestConfig, useAuthStore } from "@/utils/auth";
+import {
+  authDiscovery,
+  authRequestConfig,
+  exchangeAuthCodeAsync,
+  useAuthStore,
+} from "@/utils/auth";
 import { useUserStore } from "@/utils/user";
 
 import "expo-dev-client";
@@ -25,12 +28,13 @@ SplashScreen.preventAutoHideAsync();
 SystemUI.setBackgroundColorAsync("#000000");
 
 export const unstable_settings = {
-  initialRouteName: "/(tabs)/home",
+  initialRouteName: "(tabs)",
 };
 
 const SKIP_AUTH = false;
 
 export default function RootLayout() {
+  const { code } = useGlobalSearchParams();
   const { setAuthToken, authToken } = useAuthStore();
   const { user, setUser } = useUserStore();
 
@@ -48,15 +52,14 @@ export default function RootLayout() {
   useEffect(() => {
     if (response?.type === "success") {
       const { code } = response.params;
-      exchangeCodeAsync(
-        {
-          code,
-          clientSecret: process.env.EXPO_PUBLIC_CLIENT_SECRET,
-          clientId: process.env.EXPO_PUBLIC_CLIENT_ID ?? "",
-          redirectUri: authRequestConfig.redirectUri,
-        },
-        authDiscovery,
-      ).then((token: TokenResponse) => setAuthToken(token.accessToken));
+      exchangeAuthCodeAsync(code).then((token: TokenResponse) =>
+        setAuthToken(token.accessToken),
+      );
+    } else if (code) {
+      exchangeAuthCodeAsync(code.toString()).then((token: TokenResponse) =>
+        setAuthToken(token.accessToken),
+      );
+      maybeCompleteAuthSession();
     }
   }, [response]);
 
@@ -78,7 +81,7 @@ export default function RootLayout() {
 
   useEffect(() => {
     if (loaded) {
-      SplashScreen.hideAsync();
+      SplashScreen.hideAsync().catch(console.error);
     }
   }, [loaded]);
 

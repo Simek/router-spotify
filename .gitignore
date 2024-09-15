@@ -46,3 +46,8 @@ ios/
 
 expo-env.d.ts
 # @end expo-cli
+
+.yarn/*
+!.yarn/patches
+!.yarn/plugins
+!.yarn/releases

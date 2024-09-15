@@ -1,5 +1,5 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { makeRedirectUri } from "expo-auth-session";
+import { exchangeCodeAsync, makeRedirectUri } from "expo-auth-session";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
@@ -20,6 +20,7 @@ export const authRequestConfig = {
   redirectUri: makeRedirectUri({
     scheme: "dev.simek.routerspotify",
     native: "routerspotify://",
+    preferLocalhost: true,
   }),
 };
 
@@ -45,3 +46,15 @@ export const useAuthStore = create<AuthStore>()(
     },
   ),
 );
+
+export function exchangeAuthCodeAsync(code: string) {
+  return exchangeCodeAsync(
+    {
+      code,
+      clientSecret: process.env.EXPO_PUBLIC_CLIENT_SECRET,
+      clientId: process.env.EXPO_PUBLIC_CLIENT_ID ?? "",
+      redirectUri: authRequestConfig.redirectUri,
+    },
+    authDiscovery,
+  );
+}

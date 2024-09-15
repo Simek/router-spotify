@@ -2,7 +2,7 @@ import { BlurView } from "expo-blur";
 import { LinearGradient } from "expo-linear-gradient";
 import { Tabs, usePathname } from "expo-router";
 import { StatusBar } from "expo-status-bar";
-import { StyleSheet } from "react-native";
+import { Platform, StyleSheet } from "react-native";
 
 import { PlayerSheet } from "@/components/PlayerSheet";
 import { TabBarButton } from "@/components/navigation/TabBarButton";
@@ -25,9 +25,12 @@ export default function TabsLayout() {
             borderTopWidth: 0,
             position: "absolute",
             bottom: pathname.startsWith("/search/genre") ? -80 : 0,
+            minHeight: Platform.select({ web: 64 }),
           },
           tabBarLabelStyle: {
-            marginBottom: -4,
+            marginBottom: Platform.select({ web: 0, default: -4 }),
+            marginTop: Platform.select({ web: 16, default: 0 }),
+            marginLeft: Platform.select({ web: 0 }),
             fontFamily: "GothamMedium",
             userSelect: "none",
           },

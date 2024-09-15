@@ -1,6 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Link, Stack } from "expo-router";
-import { Text, FlatList, View, Pressable } from "react-native";
+import { Text, FlatList, View, Pressable, ScrollView } from "react-native";
 
 import searchGenres from "@/assets/data/searchGenres.json";
 import searchTopics from "@/assets/data/searchTopics.json";
@@ -23,7 +23,7 @@ export default function SearchScreen() {
                 </Link>
               }
               bottomSlot={
-                <View className="px-4 pb-4">
+                <View className="px-4 pb-4 web:pb-0">
                   <Pressable className="py-2.5 px-3.5 flex flex-row text-gray-300 bg-white rounded-md items-center gap-2">
                     <Ionicons name="search-outline" size={24} />
                     <Text className="font-light">
@@ -36,7 +36,7 @@ export default function SearchScreen() {
           ),
         }}
       />
-      <View className="pl-2.5">
+      <ScrollView className="pl-2.5">
         <FlatList
           numColumns={2}
           ListHeaderComponent={
@@ -64,7 +64,7 @@ export default function SearchScreen() {
           contentContainerClassName="gap-4"
           data={searchTopics}
         />
-      </View>
+      </ScrollView>
     </View>
   );
 }

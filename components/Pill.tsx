@@ -13,7 +13,8 @@ export function Pill({ content, isActive, className }: Props) {
     <View
       className={twMerge(
         "rounded-full h-8 px-4 bg-[#222] items-center justify-center transition-colors",
-        isActive && "bg-emerald-500",
+        "hover:bg-[#2a2a2a]",
+        isActive && "bg-emerald-500 hover:bg-emerald-400",
         className,
       )}
     >
