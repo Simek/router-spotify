@@ -11,7 +11,7 @@ export function DrawerContent() {
   const { user } = useUserStore();
   return (
     <SafeAreaView className="flex flex-1 bg-[#101010]">
-      <View className="px-4 py-2 gap-6">
+      <View className="px-4 py-2 gap-2 web:py-6">
         <Link href="/profile" asChild>
           <Pressable>
             {({ pressed }) => (
@@ -41,7 +41,7 @@ export function DrawerContent() {
             )}
           </Pressable>
         </Link>
-        <Pressable className="flex flex-row gap-2 items-center ">
+        <Pressable className="flex flex-row gap-2 py-2 items-center ">
           <Ionicons name="flash-outline" size={24} color="#fff" />
           <Text className="font-default text-md text-white">What's new</Text>
         </Pressable>
@@ -51,8 +51,6 @@ export function DrawerContent() {
           iconName="settings-outline"
         />
         <DrawerLink
-          // NOTE: Sitemap screen exist, but TS complains
-          // @ts-ignore
           href="/_sitemap"
           title="Sitemap"
           iconName="trail-sign-outline"

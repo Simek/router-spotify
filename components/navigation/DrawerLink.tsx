@@ -16,7 +16,8 @@ export default function DrawerLink({ title, href, iconName }: Props) {
         {({ pressed }) => (
           <View
             className={twMerge(
-              "flex flex-row gap-2 items-center",
+              "flex flex-row gap-2 items-center py-2",
+              "hover:opacity-80",
               pressed && "opacity-80",
             )}
           >

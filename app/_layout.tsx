@@ -3,6 +3,7 @@ import { useAuthRequest, type TokenResponse } from "expo-auth-session";
 import { useFonts } from "expo-font";
 import { useGlobalSearchParams } from "expo-router";
 import { Drawer } from "expo-router/drawer";
+import Head from "expo-router/head";
 import * as SplashScreen from "expo-splash-screen";
 import { StatusBar } from "expo-status-bar";
 import * as SystemUI from "expo-system-ui";
@@ -24,8 +25,8 @@ import "expo-dev-client";
 
 import "../global.css";
 
-SplashScreen.preventAutoHideAsync();
-SystemUI.setBackgroundColorAsync("#000000");
+SplashScreen.preventAutoHideAsync().catch(console.error);
+SystemUI.setBackgroundColorAsync("#000000").catch(console.error);
 
 export const unstable_settings = {
   initialRouteName: "(tabs)",
@@ -61,7 +62,7 @@ export default function RootLayout() {
       );
       maybeCompleteAuthSession();
     }
-  }, [response]);
+  }, [response, code]);
 
   useEffect(() => {
     if (authToken && !user) {
@@ -92,12 +93,18 @@ export default function RootLayout() {
   return (
     <GestureHandlerRootView className="flex flex-1 bg-black">
       <StatusBar style="light" />
+      <Head>
+        <title>Router Spotify</title>
+      </Head>
       {SKIP_AUTH || authToken ? (
         <BottomSheetModalProvider>
           <Drawer
             drawerContent={() => <DrawerContent />}
             screenOptions={{
               headerShown: false,
+              drawerStyle: {
+                backgroundColor: "#101010",
+              },
             }}
           >
             <Drawer.Screen name="(tabs)" />

@@ -49,7 +49,7 @@ export default function HomeScreen() {
     <View className="flex-1 items-center justify-center bg-black">
       <StatusBar style="light" />
       <Head>
-        <title>Router Spotify &mdash; Search</title>
+        <title>Router Spotify &mdash; Home</title>
       </Head>
       <Stack.Screen
         options={{

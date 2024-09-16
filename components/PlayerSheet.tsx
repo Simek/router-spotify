@@ -116,7 +116,7 @@ export function PlayerSheet() {
       />
       <Pressable onPress={handlePresentModalPress}>
         <Animated.View
-          className="relative flex flex-row gap-3 w-[98vw] mx-[1vw] h-[56px] mt-[22px] rounded-lg p-2 items-center bg-[#333]"
+          className="relative overflow-hidden flex flex-row gap-3 w-[98vw] mx-[1vw] h-[56px] mt-[22px] rounded-lg p-2 items-center bg-[#333]"
           style={{ backgroundColor }}
         >
           <View style={StyleSheet.absoluteFill} className="bg-[#0006]" />
@@ -125,7 +125,7 @@ export function PlayerSheet() {
             style={{ width: 40, height: 40, borderRadius: 4 }}
           />
           {player.item.duration_ms && player.progress_ms ? (
-            <View className="absolute h-0.5 w-full bg-[#fff4] bottom-0 left-2">
+            <View className="absolute h-0.5 w-[97vw] bg-[#fff4] bottom-0 left-[0.5vw]">
               <Animated.View
                 className="flex h-0.5 rounded-full bg-[#fff]"
                 style={playbackProgressStyle}
@@ -173,14 +173,19 @@ export function PlayerSheet() {
         handleComponent={null}
       >
         <View className="absolute inset-0 size-full -z-[1] bg-[#111]" />
-        <BottomSheetScrollView contentContainerClassName="flex flex-1 items-center bg-[#111] pt-10 rounded-t-2xl overflow-hidden min-h-[100vh]">
+        <BottomSheetScrollView
+          contentContainerClassName={twMerge(
+            "flex flex-1 items-center bg-[#111] pt-10 rounded-t-2xl overflow-hidden min-h-[100vh]",
+            "web:pt-4 web:mt-4 web:mx-4 web:bg-transparent",
+          )}
+        >
           <StatusBar style="light" />
           <LinearGradient
             style={[StyleSheet.absoluteFill]}
             colors={[backgroundColor, "transparent"]}
             locations={[0, 0.8]}
           />
-          <SafeAreaView>
+          <SafeAreaView className="web:w-full web:px-10">
             <View className="flex flex-row items-center justify-between mt-2 mb-2">
               <Pressable
                 onPress={() => bottomSheetModalRef?.current?.dismiss()}
@@ -196,7 +201,12 @@ export function PlayerSheet() {
               </Text>
               <Ionicons name="ellipsis-horizontal" size={24} color="#fff" />
             </View>
-            <View className="flex w-[86vw] h-[86vw] rounded-lg overflow-hidden my-14">
+            <View
+              className={twMerge(
+                "flex w-[86vw] h-[86vw] rounded-lg overflow-hidden my-14 mx-auto",
+                "web:max-w-[480px] web:max-h-[480px]",
+              )}
+            >
               <Image
                 source={player.item.album.images[0].url}
                 style={StyleSheet.absoluteFill}
@@ -214,7 +224,7 @@ export function PlayerSheet() {
                 {player.item.artists.map((artist) => artist.name).join(", ")}
               </Text>
             </View>
-            <View className="h-1 w-[86vw] bg-[#fff4]">
+            <View className="h-1 w-[86vw] bg-[#fff4] web:w-full">
               <Animated.View
                 className="flex h-1 bg-[#fff] rounded-full"
                 style={playbackProgressStyle}
