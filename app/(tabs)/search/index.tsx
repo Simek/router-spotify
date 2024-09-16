@@ -61,7 +61,7 @@ export default function SearchScreen() {
           ListFooterComponent={<View className="h-20 w-full" />}
           renderItem={SearchTopicTile}
           columnWrapperClassName="gap-4"
-          contentContainerClassName="gap-4"
+          contentContainerClassName="gap-4 mx-auto"
           data={searchTopics}
         />
       </ScrollView>

@@ -1,5 +1,7 @@
 import { ImageColorsResult } from "react-native-image-colors";
 
+import { TopArtists } from "@/types/spotify";
+
 export function msToDuration(value?: number | null) {
   if (!value) {
     return 0;
@@ -38,4 +40,12 @@ export function getPreferredBackgroundColor(colors: ImageColorsResult | null) {
   } else {
     return colors.vibrant;
   }
+}
+
+export function getSeedArtistsIds(artists: TopArtists) {
+  return encodeURIComponent(
+    Array.from(new Set(artists.items.map((item) => item.id).flat()))
+      .slice(0, 5)
+      .join(","),
+  );
 }

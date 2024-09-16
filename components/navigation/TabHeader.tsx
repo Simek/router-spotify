@@ -3,6 +3,7 @@ import { Image } from "expo-image";
 import { useNavigation } from "expo-router";
 import { type ReactNode } from "react";
 import { Pressable, SafeAreaView, Text, View, StyleSheet } from "react-native";
+import { twMerge } from "tailwind-merge";
 
 import { useUserStore } from "@/utils/user";
 
@@ -18,7 +19,12 @@ export function TabHeader({ leftSlot, rightSlot, bottomSlot }: Props) {
 
   return (
     <SafeAreaView className="w-full flex bg-black web:py-4">
-      <View className="px-4 pb-3 flex flex-row justify-between items-start">
+      <View
+        className={twMerge(
+          "px-4 flex flex-row justify-between items-start",
+          bottomSlot && "pb-3",
+        )}
+      >
         <View className="flex flex-row items-center gap-2">
           <Pressable
             onPress={() => navigation.dispatch(DrawerActions.toggleDrawer())}

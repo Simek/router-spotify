@@ -21,7 +21,8 @@ export async function fetchAPI(
     })
     .then((data) => {
       setter(data);
-    });
+    })
+    .catch(console.error);
 }
 
 export async function fetchAPIControl(

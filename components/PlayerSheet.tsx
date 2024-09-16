@@ -108,7 +108,7 @@ export function PlayerSheet() {
   const backgroundColor = getPreferredBackgroundColor(colors);
 
   return (
-    <View className="flex absolute w-full h-24 bottom-[79px]">
+    <View className="flex absolute w-full h-24 bottom-[79px] web:bottom-16">
       <LinearGradient
         style={StyleSheet.absoluteFill}
         colors={["#0000", "#000c"]}

@@ -9,6 +9,7 @@ export const authRequestConfig = {
     "user-follow-read",
     "user-library-read",
     "user-read-email",
+    "user-follow-read",
     "user-read-recently-played",
     "user-top-read",
     "user-read-playback-state",
