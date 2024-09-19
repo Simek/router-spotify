@@ -17,6 +17,7 @@ import {
   authDiscovery,
   authRequestConfig,
   exchangeAuthCodeAsync,
+  refreshTokenAsync,
   useAuthStore,
 } from "@/utils/auth";
 import { useUserStore } from "@/utils/user";
@@ -32,11 +33,10 @@ export const unstable_settings = {
   initialRouteName: "(tabs)",
 };
 
-const SKIP_AUTH = false;
-
 export default function RootLayout() {
   const { code } = useGlobalSearchParams();
-  const { setAuthToken, authToken } = useAuthStore();
+  const { setAuthToken, authToken, setRefreshToken, refreshToken } =
+    useAuthStore();
   const { user, setUser } = useUserStore();
 
   const [loaded, error] = useFonts({
@@ -50,16 +50,22 @@ export default function RootLayout() {
     authDiscovery,
   );
 
+  function handleAuth(token: TokenResponse) {
+    setAuthToken(token.accessToken);
+    setRefreshToken(token.refreshToken ?? null);
+
+    setTimeout(
+      async () => refreshToken && (await refreshTokenAsync(refreshToken)),
+      ((token.expiresIn ?? 3600) - 600) * 1000,
+    );
+  }
+
   useEffect(() => {
     if (response?.type === "success") {
       const { code } = response.params;
-      exchangeAuthCodeAsync(code).then((token: TokenResponse) =>
-        setAuthToken(token.accessToken),
-      );
+      exchangeAuthCodeAsync(code).then(handleAuth);
     } else if (code) {
-      exchangeAuthCodeAsync(code.toString()).then((token: TokenResponse) =>
-        setAuthToken(token.accessToken),
-      );
+      exchangeAuthCodeAsync(code.toString()).then(handleAuth);
       maybeCompleteAuthSession();
     }
   }, [response, code]);
@@ -96,7 +102,7 @@ export default function RootLayout() {
       <Head>
         <title>Router Spotify</title>
       </Head>
-      {SKIP_AUTH || authToken ? (
+      {authToken ? (
         <BottomSheetModalProvider>
           <Drawer
             drawerContent={() => <DrawerContent />}

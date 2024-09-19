@@ -1,4 +1,3 @@
-import { Image } from "expo-image";
 import { Stack } from "expo-router";
 import Head from "expo-router/head";
 import { StatusBar } from "expo-status-bar";
@@ -8,14 +7,15 @@ import {
   Text,
   Pressable,
   ScrollView,
-  StyleSheet,
   FlatList,
   Platform,
 } from "react-native";
 
+import { ArtistTile } from "@/components/ArtistTile";
 import { Pill } from "@/components/Pill";
+import { RecommendedAlbumTile } from "@/components/RecommendedAlbumTile";
+import { TopTrackTile } from "@/components/TopTrackTile";
 import { TabHeader } from "@/components/navigation/TabHeader";
-import { TopTrackTile } from "@/components/navigation/TopTrackTile";
 import {
   Artist,
   ListResponse,
@@ -49,7 +49,7 @@ export default function HomeScreen() {
       `me/top/tracks?time_range=long_term&limit=${PER_PAGE}&offset=0`,
       authToken,
       setUserTopTracks,
-    );
+    ).catch(console.error);
   }, []);
 
   useEffect(() => {
@@ -57,7 +57,7 @@ export default function HomeScreen() {
       `me/top/artists?time_range=short_term&limit=${PER_PAGE}&offset=0`,
       authToken,
       setUserTopArtists,
-    );
+    ).catch(console.error);
   }, []);
 
   useEffect(() => {
@@ -65,7 +65,7 @@ export default function HomeScreen() {
       `me/following?type=artist&limit=${PER_PAGE}`,
       authToken,
       setUserFollowedArtists,
-    );
+    ).catch(console.error);
   }, []);
 
   useEffect(() => {
@@ -74,7 +74,7 @@ export default function HomeScreen() {
         `recommendations?seed_artists=${getSeedArtistsIds(userTopArtists)}&limit=${PER_PAGE}`,
         authToken,
         setUserRecommendedTracks,
-      );
+      ).catch(console.error);
     }
   }, [userTopArtists]);
 
@@ -118,18 +118,7 @@ export default function HomeScreen() {
             <ScrollView horizontal contentContainerClassName="px-4 gap-4">
               {userTopArtists?.items &&
                 userTopArtists.items.map((item: Artist) => (
-                  <View
-                    key={`top-artist-${item.id}`}
-                    className="flex gap-2 items-center"
-                  >
-                    <View className="size-32 bg-[#111] rounded-full inline-flex overflow-hidden">
-                      <Image
-                        source={item.images[0].url}
-                        style={StyleSheet.absoluteFill}
-                      />
-                    </View>
-                    <Text className="text-white font-default">{item.name}</Text>
-                  </View>
+                  <ArtistTile item={item} key={`top-artist-${item.id}`} />
                 ))}
             </ScrollView>
           </View>
@@ -156,32 +145,13 @@ export default function HomeScreen() {
             {userRecommendedTracks?.tracks && (
               <FlatList
                 horizontal
-                data={userRecommendedTracks?.tracks?.map((item) => item.album)}
+                data={userRecommendedTracks?.tracks}
                 contentContainerClassName="px-4 py-2 gap-4"
                 viewabilityConfig={{
                   viewAreaCoveragePercentThreshold: 90,
                 }}
                 renderItem={({ item }) => (
-                  <View className="gap-2">
-                    <View className="size-48">
-                      <Image
-                        source={item.images[0].url}
-                        style={StyleSheet.absoluteFill}
-                      />
-                    </View>
-                    <View>
-                      <Text
-                        numberOfLines={2}
-                        ellipsizeMode="tail"
-                        className="font-default text-sm text-white w-48"
-                      >
-                        {item.name}
-                      </Text>
-                      <Text className="font-default text-sm text-gray-300 w-48">
-                        {item.artists[0].name}
-                      </Text>
-                    </View>
-                  </View>
+                  <RecommendedAlbumTile item={item.album} uri={item.uri} />
                 )}
               />
             )}
@@ -193,18 +163,7 @@ export default function HomeScreen() {
             <ScrollView horizontal contentContainerClassName="px-4 gap-4">
               {userFollowedArtists?.artists?.items &&
                 userFollowedArtists?.artists?.items.map((item: Artist) => (
-                  <View
-                    key={`followed-artist-${item.id}`}
-                    className="flex gap-2 items-center"
-                  >
-                    <View className="size-32 bg-[#111] rounded-full inline-flex overflow-hidden">
-                      <Image
-                        source={item.images[0].url}
-                        style={StyleSheet.absoluteFill}
-                      />
-                    </View>
-                    <Text className="text-white font-default">{item.name}</Text>
-                  </View>
+                  <ArtistTile item={item} key={`followed-artist-${item.id}`} />
                 ))}
             </ScrollView>
           </View>

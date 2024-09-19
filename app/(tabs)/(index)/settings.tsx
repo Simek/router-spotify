@@ -6,10 +6,10 @@ import { useAuthStore } from "@/utils/auth";
 import { useUserStore } from "@/utils/user";
 
 export default function SettingsScreen() {
-  const { setAuthToken } = useAuthStore();
+  const { setAuthToken, setRefreshToken } = useAuthStore();
   const { setUser } = useUserStore();
 
-  const router = useRouter();
+  const { navigate } = useRouter();
 
   return (
     <View className="flex-1 items-center justify-center bg-black">
@@ -35,9 +35,10 @@ export default function SettingsScreen() {
       <Pressable
         className="bg-white rounded-full py-2 px-5 items-center min-w-[33vw]"
         onPress={() => {
+          navigate("/");
           setAuthToken(null);
+          setRefreshToken(null);
           setUser(null);
-          router.navigate("/");
         }}
       >
         <Text className="font-default text-lg">Log out</Text>

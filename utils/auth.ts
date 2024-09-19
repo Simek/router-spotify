@@ -1,5 +1,9 @@
 import AsyncStorage from "@react-native-async-storage/async-storage";
-import { exchangeCodeAsync, makeRedirectUri } from "expo-auth-session";
+import {
+  exchangeCodeAsync,
+  makeRedirectUri,
+  refreshAsync,
+} from "expo-auth-session";
 import { create } from "zustand";
 import { createJSONStorage, persist } from "zustand/middleware";
 
@@ -33,13 +37,17 @@ export const authDiscovery = {
 type AuthStore = {
   authToken: string | null;
   setAuthToken: (token: string | null) => void;
+  refreshToken: string | null;
+  setRefreshToken: (token: string | null) => void;
 };
 
 export const useAuthStore = create<AuthStore>()(
   persist(
     (set) => ({
       authToken: null,
+      refreshToken: null,
       setAuthToken: (token) => set(() => ({ authToken: token })),
+      setRefreshToken: (token) => set(() => ({ refreshToken: token })),
     }),
     {
       name: "user-auth-token",
@@ -55,6 +63,17 @@ export function exchangeAuthCodeAsync(code: string) {
       clientSecret: process.env.EXPO_PUBLIC_CLIENT_SECRET,
       clientId: process.env.EXPO_PUBLIC_CLIENT_ID ?? "",
       redirectUri: authRequestConfig.redirectUri,
+    },
+    authDiscovery,
+  );
+}
+
+export function refreshTokenAsync(refreshToken: string) {
+  return refreshAsync(
+    {
+      refreshToken,
+      clientSecret: process.env.EXPO_PUBLIC_CLIENT_SECRET,
+      clientId: process.env.EXPO_PUBLIC_CLIENT_ID ?? "",
     },
     authDiscovery,
   );

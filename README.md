@@ -22,6 +22,3 @@ You can download the latest development build using links below:
 1. Create new Spotify App at https://developer.spotify.com/dashboard/create.
    * Set Redirect URI to: `routerspotify://`.
 2. Enter the app Client ID and Secret in `.env.example`, then rename file to `.env.local`.
-
-You can also skip authentication part, by setting `SKIP_AUTH` flag in root layout file to `true`:
-* https://github.com/simek/router-spotify/blob/main/app/_layout.tsx#L29-L29

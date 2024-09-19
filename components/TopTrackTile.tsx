@@ -30,7 +30,7 @@ export function TopTrackTile({ item }: Props) {
   }
 
   return (
-    <Pressable onPress={playNowAction} key={item.id}>
+    <Pressable onPress={playNowAction}>
       {({ pressed }) => (
         <View
           className={twMerge(
