@@ -116,7 +116,10 @@ export function PlayerSheet() {
       />
       <Pressable onPress={handlePresentModalPress}>
         <Animated.View
-          className="relative overflow-hidden flex flex-row gap-3 w-[98vw] mx-[1vw] h-[56px] mt-[22px] rounded-lg p-2 items-center bg-[#333]"
+          className={twMerge(
+            "relative overflow-hidden flex flex-row gap-3 w-[98vw] mx-[1vw] h-[56px] mt-[22px] rounded-lg p-2 items-center bg-[#333]",
+            "web:w-[97vw] mx-[1.5vw]",
+          )}
           style={{ backgroundColor }}
         >
           <View style={StyleSheet.absoluteFill} className="bg-[#0006]" />
@@ -171,12 +174,18 @@ export function PlayerSheet() {
         index={1}
         snapPoints={snapPoints}
         handleComponent={null}
+        backgroundStyle={{ backgroundColor: "transparent" }}
       >
-        <View className="absolute inset-0 size-full -z-[1] bg-[#111]" />
+        <View
+          className={twMerge(
+            "absolute inset-0 size-full -z-[1] bg-[#111]",
+            "web:bg-transparent",
+          )}
+        />
         <BottomSheetScrollView
           contentContainerClassName={twMerge(
             "flex flex-1 items-center bg-[#111] pt-10 rounded-t-2xl overflow-hidden min-h-[100vh]",
-            "web:pt-4 web:mt-4 web:mx-4 web:bg-transparent",
+            "web:pt-4 web:mt-4 web:mx-4",
           )}
         >
           <StatusBar style="light" />

@@ -8,6 +8,7 @@
     "build": "eas build --profile development",
     "build:internal": "eas build --profile internal",
     "build:preview": "eas build --profile preview",
+    "export:web": "expo export -p web",
     "lint": "eslint ."
   },
   "dependencies": {
