@@ -31,7 +31,12 @@ export function RecommendedAlbumTile({ item, uri }: Props) {
   return (
     <Pressable onPress={playNowAction} key={item.id}>
       {({ pressed }) => (
-        <View className={twMerge("gap-2", pressed ? "scale-95" : "scale-100")}>
+        <View
+          className={twMerge(
+            "gap-2 transition",
+            pressed ? "scale-95" : "scale-100",
+          )}
+        >
           <View className="size-48">
             <Image
               source={item.images[0].url}

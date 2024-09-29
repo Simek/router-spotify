@@ -36,9 +36,11 @@ export const authDiscovery = {
 
 type AuthStore = {
   authToken: string | null;
-  setAuthToken: (token: string | null) => void;
+  setAuthToken: (authToken: string | null) => void;
   refreshToken: string | null;
-  setRefreshToken: (token: string | null) => void;
+  setRefreshToken: (refreshToken: string | null) => void;
+  expireDate: number | null;
+  setExpireDate: (expireDate: number | null) => void;
 };
 
 export const useAuthStore = create<AuthStore>()(
@@ -46,8 +48,10 @@ export const useAuthStore = create<AuthStore>()(
     (set) => ({
       authToken: null,
       refreshToken: null,
-      setAuthToken: (token) => set(() => ({ authToken: token })),
-      setRefreshToken: (token) => set(() => ({ refreshToken: token })),
+      expireDate: null,
+      setAuthToken: (authToken) => set(() => ({ authToken })),
+      setRefreshToken: (refreshToken) => set(() => ({ refreshToken })),
+      setExpireDate: (expireDate) => set(() => ({ expireDate })),
     }),
     {
       name: "user-auth-token",

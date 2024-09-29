@@ -25,7 +25,7 @@ export default function ScanCodeModal() {
 
   return (
     <View className="bg-black flex flex-1">
-      <CameraView className="absolute inset-0" facing="back">
+      <CameraView facing="back" style={{ flex: 1 }}>
         {isPresented && (
           <Link href="../" className="m-4">
             <Ionicons name="close" size={30} color="#fff" />

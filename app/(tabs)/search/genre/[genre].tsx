@@ -15,7 +15,7 @@ export default function GenreScreen() {
   return (
     <View className="flex flex-1 items-center bg-black">
       <Image source={genre?.image} style={StyleSheet.absoluteFill} />
-      <SafeAreaView className="w-full flex">
+      <SafeAreaView className="w-full flex web:py-4">
         <View className="px-4 pb-3 flex flex-row justify-between items-center gap-2">
           <Pressable onPress={() => navigation.goBack()} className="size-6">
             <Ionicons name="chevron-back" size={24} color="#fff" />

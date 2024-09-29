@@ -41,7 +41,7 @@ export function DrawerContent() {
             )}
           </Pressable>
         </Link>
-        <Pressable className="flex flex-row gap-2 py-2 items-center ">
+        <Pressable className="flex flex-row gap-2 py-2 items-center">
           <Ionicons name="flash-outline" size={24} color="#fff" />
           <Text className="font-default text-md text-white">What's new</Text>
         </Pressable>

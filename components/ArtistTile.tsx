@@ -38,7 +38,7 @@ export function ArtistTile({ item }: Props) {
         <View
           key={`top-artist-${item.id}`}
           className={twMerge(
-            "flex gap-2 items-center",
+            "flex gap-2 items-center transition",
             pressed ? "scale-95" : "scale-100",
           )}
         >

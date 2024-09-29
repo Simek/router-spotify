@@ -30,10 +30,17 @@ export function PlayerSheet() {
   const { player, setPlayerData } = usePlayerStore();
 
   useEffect(() => {
-    fetchAPI(`me/player`, authToken, (data: PlayerState) => {
-      if (!data) return;
-      setPlayerData(data);
-    });
+    fetchAPI(
+      `me/player`,
+      authToken,
+      (data: PlayerState) => {
+        if (!data) return;
+        setPlayerData(data);
+      },
+      () => {
+        setPlayerData(null);
+      },
+    );
 
     setInterval(
       () =>
@@ -257,7 +264,10 @@ export function PlayerSheet() {
                     name="play-skip-back"
                     size={36}
                     color="#fff"
-                    className={pressed ? "scale-90" : "scale-100"}
+                    className={twMerge(
+                      "transition",
+                      pressed ? "scale-90" : "scale-100",
+                    )}
                   />
                 )}
               </Pressable>
@@ -284,7 +294,10 @@ export function PlayerSheet() {
                     name="play-skip-forward"
                     size={36}
                     color="#fff"
-                    className={pressed ? "scale-90" : "scale-100"}
+                    className={twMerge(
+                      "transition",
+                      pressed ? "scale-90" : "scale-100",
+                    )}
                   />
                 )}
               </Pressable>

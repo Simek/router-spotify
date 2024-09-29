@@ -13,6 +13,7 @@ import { Pressable, SafeAreaView, Text, View } from "react-native";
 import { GestureHandlerRootView } from "react-native-gesture-handler";
 
 import { DrawerContent } from "@/components/navigation/DrawerContent";
+import { User } from "@/types/spotify";
 import {
   authDiscovery,
   authRequestConfig,
@@ -20,6 +21,7 @@ import {
   refreshTokenAsync,
   useAuthStore,
 } from "@/utils/auth";
+import { fetchAPI } from "@/utils/fetch";
 import { useUserStore } from "@/utils/user";
 
 import "expo-dev-client";
@@ -35,8 +37,14 @@ export const unstable_settings = {
 
 export default function RootLayout() {
   const { code } = useGlobalSearchParams();
-  const { setAuthToken, authToken, setRefreshToken, refreshToken } =
-    useAuthStore();
+  const {
+    setAuthToken,
+    authToken,
+    setRefreshToken,
+    refreshToken,
+    setExpireDate,
+    expireDate,
+  } = useAuthStore();
   const { user, setUser } = useUserStore();
 
   const [loaded, error] = useFonts({
@@ -53,12 +61,14 @@ export default function RootLayout() {
   function handleAuth(token: TokenResponse) {
     setAuthToken(token.accessToken);
     setRefreshToken(token.refreshToken ?? null);
-
-    setTimeout(
-      async () => refreshToken && (await refreshTokenAsync(refreshToken)),
-      ((token.expiresIn ?? 3600) - 600) * 1000,
-    );
+    setExpireDate(Date.now() + (token.expiresIn ?? 3600) * 1000);
   }
+
+  useEffect(() => {
+    if (refreshToken && expireDate && expireDate < Date.now() - 60_000) {
+      refreshTokenAsync(refreshToken).catch(console.error);
+    }
+  }, [expireDate]);
 
   useEffect(() => {
     if (response?.type === "success") {
@@ -72,13 +82,9 @@ export default function RootLayout() {
 
   useEffect(() => {
     if (authToken && !user) {
-      fetch("https://api.spotify.com/v1/me", {
-        headers: {
-          Authorization: `Bearer ${authToken}`,
-        },
-      })
-        .then((response) => response.json())
-        .then((data) => setUser(data));
+      fetchAPI("me", authToken, (data: User) => setUser(data)).catch(
+        console.error,
+      );
     }
   }, [authToken]);
 

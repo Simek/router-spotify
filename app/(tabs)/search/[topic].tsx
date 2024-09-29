@@ -11,6 +11,7 @@ import {
   View,
   Image,
   ScrollView,
+  Platform,
 } from "react-native";
 import { twMerge } from "tailwind-merge";
 
@@ -18,6 +19,8 @@ import searchTopics from "@/assets/data/searchTopics.json";
 import type { SearchAlbums, SearchPlaylist } from "@/types/spotify";
 import { useAuthStore } from "@/utils/auth";
 import { fetchAPI } from "@/utils/fetch";
+
+const PER_PAGE = 16;
 
 export default function TopicScreen() {
   const { authToken } = useAuthStore();
@@ -33,19 +36,19 @@ export default function TopicScreen() {
 
   useEffect(() => {
     fetchAPI(
-      `search?q=${topicId}%2520genre&type=playlist&limit=16`,
+      `search?q=${topicId}%2520genre&type=playlist&limit=${PER_PAGE}`,
       authToken,
       setTopPlaylist,
     );
-  }, []);
+  }, [topicId]);
 
   useEffect(() => {
     fetchAPI(
-      `search?q=${topicId}%2520genre&type=album&limit=16`,
+      `search?q=${topicId}%2520genre&type=album&limit=${PER_PAGE}`,
       authToken,
       setTopAlbums,
     );
-  }, []);
+  }, [topicId]);
 
   return (
     <View className="flex-1 items-center justify-center bg-black w-screen">
@@ -92,7 +95,7 @@ export default function TopicScreen() {
                   source={{
                     uri: item.images[0].url,
                   }}
-                  className="size-48"
+                  className="size-48 bg-[#111]"
                 />
                 <Text
                   numberOfLines={2}
@@ -141,7 +144,7 @@ export default function TopicScreen() {
             <LinearGradient
               style={[StyleSheet.absoluteFill, { top: -60 }]}
               colors={["transparent", "#000"]}
-              locations={[0, 0.1]}
+              locations={[0, Platform.select({ web: 0.33, default: 0.1 })]}
             />
           </View>
         </View>
