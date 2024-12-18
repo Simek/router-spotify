@@ -1,0 +1,20 @@
+name: 🌐 Deploy web app
+
+on:
+  push:
+    branches:
+      - 'main'
+
+jobs:
+  custom-job:
+    type: custom
+    steps:
+      - uses: eas/checkout
+
+      - uses: eas/install_node_modules
+
+      - name: 📦️ Bundle web app
+        run: yarn export:web
+
+      - name: 🚚 Deploy
+        run: npx eas-cli@latest deploy --non-interactive
