@@ -1,6 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Stack } from "expo-router";
-import { useState } from "react";
+import { Fragment, useState } from "react";
 import { View, Text, Pressable } from "react-native";
 
 import { Pill } from "@/components/Pill";
@@ -28,7 +28,7 @@ export default function LibraryScreen() {
               bottomSlot={
                 <View className="flex flex-row gap-2 px-4 mt-1">
                   {activeFilter === "none" ? (
-                    <>
+                    <Fragment>
                       <Pressable onPress={() => setActiveFilter("playlists")}>
                         <Pill content="Playlists" />
                       </Pressable>
@@ -41,9 +41,9 @@ export default function LibraryScreen() {
                       <Pressable onPress={() => setActiveFilter("downloaded")}>
                         <Pill content="Downloaded" />
                       </Pressable>
-                    </>
+                    </Fragment>
                   ) : (
-                    <>
+                    <Fragment>
                       <Pressable onPress={() => setActiveFilter("none")}>
                         <Pill
                           content={
@@ -63,7 +63,7 @@ export default function LibraryScreen() {
                         }
                         isActive
                       />
-                    </>
+                    </Fragment>
                   )}
                 </View>
               }

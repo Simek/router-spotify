@@ -87,7 +87,7 @@ export default function TopicScreen() {
           </Text>
           <FlatList
             horizontal
-            data={topPlaylists?.playlists?.items}
+            data={topPlaylists?.playlists?.items.filter(Boolean)}
             contentContainerClassName="px-4 py-2 gap-4 h-64"
             renderItem={({ item }) => (
               <View className="gap-2">

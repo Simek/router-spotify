@@ -7,7 +7,10 @@ export function TabBarButton(props: BottomTabBarButtonProps) {
     <Pressable {...props}>
       {({ pressed }) => (
         <View
-          className={twMerge(`transition`, pressed ? "scale-90" : "scale-100")}
+          className={twMerge(
+            `transition flex items-center`,
+            pressed ? "scale-90" : "scale-100",
+          )}
         >
           {props.children}
         </View>

@@ -5,7 +5,7 @@ import { twMerge } from "tailwind-merge";
 
 type Props = {
   title: string;
-  href: Href<string>;
+  href: Href;
   iconName: keyof typeof Ionicons.glyphMap;
 };
 

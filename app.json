@@ -7,11 +7,6 @@
     "icon": "./assets/images/icon.png",
     "scheme": "routerspotify",
     "userInterfaceStyle": "automatic",
-    "splash": {
-      "image": "./assets/images/splash.png",
-      "resizeMode": "contain",
-      "backgroundColor": "#000000"
-    },
     "assetBundlePatterns": [
       "**/*"
     ],
@@ -52,7 +47,19 @@
         {
           "cameraPermission": "Allow $(PRODUCT_NAME) to access your camera."
         }
-      ]
+      ],
+        [
+          "expo-splash-screen",
+          {
+            "backgroundColor": "#000000",
+            "image": "./assets/images/adaptive-icon.png",
+            "dark": {
+              "image": "./assets/images/adaptive-icon.png",
+              "backgroundColor": "#000000"
+            },
+            "imageWidth": 256
+          }
+        ]
     ],
     "experiments": {
       "typedRoutes": true

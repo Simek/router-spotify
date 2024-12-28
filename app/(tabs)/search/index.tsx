@@ -1,5 +1,6 @@
 import { Ionicons } from "@expo/vector-icons";
 import { Link, Stack } from "expo-router";
+import { Fragment } from "react";
 import { Text, FlatList, View, Pressable, ScrollView } from "react-native";
 
 import searchGenres from "@/assets/data/searchGenres.json";
@@ -40,7 +41,7 @@ export default function SearchScreen() {
         <FlatList
           numColumns={2}
           ListHeaderComponent={
-            <>
+            <Fragment>
               <FlatList
                 className="mb-4 -mt-2"
                 numColumns={3}
@@ -56,7 +57,7 @@ export default function SearchScreen() {
               <Text className="text-white text-xl font-bold py-2">
                 Browse all
               </Text>
-            </>
+            </Fragment>
           }
           ListFooterComponent={<View className="h-20 w-full" />}
           renderItem={SearchTopicTile}
